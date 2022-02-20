@@ -1,0 +1,170 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+
+export default function CourierForm() {
+  const [price, setPrice] = useState(0);
+  const [discount, setDiscount] = useState();
+  console.log(discount)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    getValues,
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    // console.log(data);
+  };
+  const fetchUsers = async () => {
+    const res = await axios.get("/rules");
+    return res.data;
+  };
+  const { data, status, error } = useQuery("rules", fetchUsers);
+  console.log(data)
+
+  
+  useEffect(() => {
+    const subscription = watch(({ weight, route }, data) => {
+      if (parseInt(weight) >= 1 && route == "isd") {
+        setPrice(50);
+      }
+      if (parseInt(weight) >= 2 && route == "isd") {
+        setPrice(25 * weight);
+      }
+      if (parseInt(weight) >= 6 && route == "isd") {
+        setPrice(15 * weight);
+      }
+      if (parseInt(weight) >= 1 && route == "osd") {
+        setPrice(100);
+      }
+      if (parseInt(weight) >= 2 && route == "osd") {
+        setPrice(50 * weight);
+      }
+      if (parseInt(weight) >= 6 && route == "osd") {
+        setPrice(25 * weight);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  return (
+    <div>
+      <div className="bg-gray-300">
+        <div className="py-12">
+          <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg md:max-w-xl">
+            <div className="md:flex ">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-full p-4 px-5 py-5"
+              >
+                <div className="flex flex-row">
+                  <h2 className="text-3xl font-semibold">Fast</h2>
+                  <h2 className="text-3xl text-green-400 font-semibold">
+                    Courier
+                  </h2>
+                </div>
+                <div className="flex flex-row text-xs pt-6 pb-5">
+                  <span className="text-sm font-semibold">
+                    Give Your Information & Grave The Discount
+                  </span>
+                </div>
+                {/**/}
+                <div className="grid md:grid-cols-2 md:gap-2">
+                  <div>
+                    <select
+                      name="route"
+                      id="route"
+                      {...register("route", { required: true })}
+                      className="input-field"
+                    >
+                      <option value={"isd"}>ISD - Inside Dhaka</option>
+                      <option value={"osd"}>OSD - Outside Dhaka</option>
+                    </select>
+                    {errors.route && (
+                      <span className="text-red-600">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+
+                  <input
+                    type="number"
+                    name="phone"
+                    className="input-field"
+                    placeholder="Phone Number*"
+                  />
+                </div>
+                <div className="grid md:grid-cols-3 md:gap-2">
+                  <div>
+                    <input
+                      type="number"
+                      name="weight"
+                      id="weight"
+                      {...register("weight", {
+                        required: true,
+                        min: 1,
+                        max: 1000,
+                      })}
+                      className="input-field"
+                      placeholder="Weight*"
+                    />
+                    {errors.weight && (
+                      <span className="text-red-600">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                  <select
+                    name="parcel"
+                    className="input-field"
+                    placeholder="Parcel Type"
+                  >
+                    <option>Type 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select>
+                  <div>
+                    <input
+                      {...register("date", { required: true })}
+                      type="date"
+                      name="date"
+                      id="date"
+                      className="input-field"
+                      placeholder="date*"
+                    />
+
+                    {errors.date && (
+                      <span className="text-red-600">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="text-right pt-5 space-y-2">
+                  <p className="text-md font-medium">
+                    Regular Price: {price} Tk
+                  </p>
+                  <p className="text-md font-medium">Discount: 10 Tk</p>
+                  <hr />
+                  <p className="text-xl font-semibold">Total Price: 100</p>
+                </div>
+                <div className="flex justify-end pt-5">
+                  <button
+                    type="submit"
+                    className="h-12 w-48 rounded font-medium text-xs bg-blue-500 text-white"
+                  >
+                    Continue to Shipping
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
