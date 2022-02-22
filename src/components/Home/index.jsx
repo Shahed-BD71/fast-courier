@@ -7,9 +7,8 @@ import swal from "sweetalert";
 
 export default function CourierForm() {
   const [price, setPrice] = useState(0);
-  const [discount, setDiscount] = useState();
-  const [date, setDate] = useState();
-  console.log(discount);
+  const [discount, setDiscount] = useState(0);
+  const [date, setDate] = useState(null);
   const {
     register,
     handleSubmit,
@@ -102,7 +101,7 @@ export default function CourierForm() {
                     Give Your Information & Grave
                     <span className="text-xl text-red-400">
                       {" "}
-                      {discount * 100}%
+                      {discount && discount * 100}%
                     </span>{" "}
                     discount before{" "}
                     <span className="md:text-xl text-medium text-red-400 underline decoration-1">
