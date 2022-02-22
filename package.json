@@ -7,7 +7,7 @@
     "preview": "vite preview",
     "start": "concurrently \"yarn run dev\" \"yarn run db\"",
     "db": "json-server --watch db/db.json --port 5000",
-    "heroku-postbuild": "yarn install && yarn vite build"
+    "heroku-postbuild": "yarn install && yarn vite build && yarn preview"
   },
   "dependencies": {
     "axios": "^0.26.0",
