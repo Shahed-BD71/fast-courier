@@ -2,7 +2,7 @@ import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 
-// vite js env file note working that's why
+// vite js env file not working that's why
 axios.defaults.baseURL = 'https://secret-lowlands-04300.herokuapp.com'
 function App() {
   return (
