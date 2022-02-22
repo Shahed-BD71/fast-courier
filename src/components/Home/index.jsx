@@ -231,8 +231,8 @@ export default function CourierForm() {
                     Discount: {discount * 100} %
                   </p>
                   <hr />
-                  <p className="text-xl font-semibold">
-                    Total Price: {Math.round(price - price * discount)}
+                  <p className="text-lg font-semibold">
+                    Total Price: {Math.round(price - price * discount)} Tk
                   </p>
                 </div>
                 <div className="flex justify-end pt-5">
