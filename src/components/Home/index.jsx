@@ -141,17 +141,22 @@ export default function CourierForm() {
                   className="input-field"
                   placeholder="Company (optional)"
                 />
-                <input
-                  type="text"
-                  name="address"
-                  id="address"
-                  {...register("address", {
-                    required: true,
-                    pattern: /^[a-zA-Z0-9\s,'-]*$/,
-                  })}
-                  className="input-field"
-                  placeholder="Address*"
-                />
+                <div>
+                  <input
+                    type="text"
+                    name="address"
+                    id="address"
+                    {...register("address", {
+                      required: true,
+                      pattern: /^[a-zA-Z0-9\s,'-]*$/,
+                    })}
+                    className="input-field"
+                    placeholder="Address*"
+                  />
+                  {errors.address && (
+                    <span className="text-red-600">This field is required</span>
+                  )}
+                </div>
                 <div className="grid md:grid-cols-2 md:gap-2">
                   <div>
                     <select
@@ -173,18 +178,24 @@ export default function CourierForm() {
                       </span>
                     )}
                   </div>
-
-                  <input
-                    type="number"
-                    name="phone"
-                    id="phone"
-                    {...register("phone", {
-                      required: true,
-                      pattern: /^([0-9\(\)\/\+ \-]*)$/,
-                    })}
-                    className="input-field"
-                    placeholder="Phone Number*"
-                  />
+                  <div>
+                    <input
+                      type="number"
+                      name="phone"
+                      id="phone"
+                      {...register("phone", {
+                        required: true,
+                        pattern: /^([0-9\(\)\/\+ \-]*)$/,
+                      })}
+                      className="input-field"
+                      placeholder="Phone Number*"
+                    />
+                    {errors.phone && (
+                      <span className="text-red-600">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="grid md:grid-cols-2 md:gap-2">
                   <div>
@@ -206,21 +217,28 @@ export default function CourierForm() {
                       </span>
                     )}
                   </div>
-                  <select
-                    name="parcel-type"
-                    id="parcel-type"
-                    {...register("parcel-type", {
-                      required: true,
-                    })}
-                    className="input-field"
-                  >
-                    <option defaultChecked disabled>
-                      Parcel Type
-                    </option>
-                    <option value={"electronics"}>Electronics</option>
-                    <option value={"cloths"}>Cloths</option>
-                    <option value={"documents"}>Documents</option>
-                  </select>
+                  <div>
+                    <select
+                      className="input-field"
+                      name="parcelType"
+                      id="parcelType"
+                      {...register("parcelType", {
+                        required: true,
+                      })}
+                    >
+                      <option defaultChecked disabled>
+                        Parcel Type
+                      </option>
+                      <option value={"electronics"}>Electronics</option>
+                      <option value={"cloths"}>Cloths</option>
+                      <option value={"documents"}>Documents</option>
+                    </select>
+                    {errors.parcelType && (
+                      <span className="text-red-600">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="pt-5 space-y-2 text-right">
