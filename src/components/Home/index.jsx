@@ -25,12 +25,12 @@ export default function CourierForm() {
         icon: "success",
         button: "Done!",
       });
-    }else{
-      alert("Something is wrong")
+    } else {
+      alert("Something is wrong");
     }
   };
   const fetchUsers = async () => {
-    const res = await axios.get("rules");
+    const res = await axios.get("/rules");
     return res.data;
   };
 
@@ -84,7 +84,7 @@ export default function CourierForm() {
     <div>
       <div className="bg-gray-300">
         <div className="py-12">
-          <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg md:max-w-xl">
+          <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg md:max-w-xl">
             <div className="md:flex ">
               <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -92,19 +92,19 @@ export default function CourierForm() {
               >
                 <div className="flex flex-row">
                   <h2 className="text-3xl font-semibold">Fast</h2>
-                  <h2 className="text-3xl text-green-400 font-semibold">
+                  <h2 className="text-3xl font-semibold text-green-400">
                     Courier
                   </h2>
                 </div>
-                <div className="flex flex-row text-xs pt-6 pb-5">
+                <div className="flex flex-row pt-6 pb-5 text-xs">
                   <span className="text-sm font-semibold">
-                    Give Your Information & Grave
+                    Fill Courier Information & Get
                     <span className="text-xl text-red-400">
                       {" "}
                       {discount && discount * 100}%
                     </span>{" "}
                     discount before{" "}
-                    <span className="md:text-xl text-medium text-red-400 underline decoration-1">
+                    <span className="text-red-400 underline md:text-xl text-medium decoration-1">
                       {dayjs(date).format("DD MMMM")}
                     </span>
                   </span>
@@ -160,6 +160,10 @@ export default function CourierForm() {
                       {...register("route", { required: true })}
                       className="input-field"
                     >
+                      {" "}
+                      <option defaultChecked disabled>
+                        Select Route
+                      </option>
                       <option value={"isd"}>ISD - Inside Dhaka</option>
                       <option value={"osd"}>OSD - Outside Dhaka</option>
                     </select>
@@ -219,11 +223,11 @@ export default function CourierForm() {
                   </select>
                 </div>
 
-                <div className="text-right pt-5 space-y-2">
-                  <p className="text-md font-medium">
+                <div className="pt-5 space-y-2 text-right">
+                  <p className="font-medium text-md">
                     Regular Price: {price} Tk
                   </p>
-                  <p className="text-md font-medium">
+                  <p className="font-medium text-md">
                     Discount: {discount * 100} %
                   </p>
                   <hr />
@@ -234,7 +238,7 @@ export default function CourierForm() {
                 <div className="flex justify-end pt-5">
                   <button
                     type="submit"
-                    className="h-12 w-48 rounded font-medium text-sm bg-blue-500 text-white"
+                    className="w-32 h-10 text-sm font-medium text-white bg-blue-500 rounded md:h-12 md:w-48"
                   >
                     Book Now
                   </button>
