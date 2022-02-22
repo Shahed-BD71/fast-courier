@@ -30,7 +30,7 @@ export default function CourierForm() {
     }
   };
   const fetchUsers = async () => {
-    const res = await axios.get("/rules");
+    const res = await axios.get("rules");
     return res.data;
   };
 
