@@ -3,11 +3,13 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
+import swal from "sweetalert";
 
 export default function CourierForm() {
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState();
-  console.log(discount)
+  const [date, setDate] = useState();
+  console.log(discount);
   const {
     register,
     handleSubmit,
@@ -17,12 +19,22 @@ export default function CourierForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // console.log(data);
+    if (data) {
+      swal({
+        title: "Success!",
+        text: "Booking Order Successfully!",
+        icon: "success",
+        button: "Done!",
+      });
+    }else{
+      alert("Something is wrong")
+    }
   };
   const fetchUsers = async () => {
     const res = await axios.get("/rules");
     return res.data;
   };
+
   const { data, status, error } = useQuery("rules", fetchUsers);
 
   useEffect(() => {
@@ -41,6 +53,7 @@ export default function CourierForm() {
         }
       }
       setDiscount(pricingRule.discount);
+      setDate(pricingRule.date);
     }
   }, [data]);
 
@@ -86,10 +99,60 @@ export default function CourierForm() {
                 </div>
                 <div className="flex flex-row text-xs pt-6 pb-5">
                   <span className="text-sm font-semibold">
-                    Give Your Information & Grave The Discount
+                    Give Your Information & Grave
+                    <span className="text-xl text-red-400">
+                      {" "}
+                      {discount * 100}%
+                    </span>{" "}
+                    discount before{" "}
+                    <span className="md:text-xl text-medium text-red-400 underline decoration-1">
+                      {dayjs(date).format("DD MMMM")}
+                    </span>
                   </span>
                 </div>
-                {/**/}
+                <div className="grid md:grid-cols-2 md:gap-2">
+                  <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    {...register("firstName", {
+                      required: true,
+                      pattern: /^[a-z ,.'-]+$/i,
+                    })}
+                    className="input-field"
+                    placeholder="First Name*"
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    {...register("lastName", {
+                      required: true,
+                      pattern: /^[a-z ,.'-]+$/i,
+                    })}
+                    className="input-field"
+                    placeholder="Last Name*"
+                  />
+                </div>
+                <input
+                  type="text"
+                  name="company"
+                  id="company"
+                  {...register("company", { pattern: /^[a-z ,.'-]+$/i })}
+                  className="input-field"
+                  placeholder="Company (optional)"
+                />
+                <input
+                  type="text"
+                  name="address"
+                  id="address"
+                  {...register("address", {
+                    required: true,
+                    pattern: /^[a-zA-Z0-9\s,'-]*$/,
+                  })}
+                  className="input-field"
+                  placeholder="Address*"
+                />
                 <div className="grid md:grid-cols-2 md:gap-2">
                   <div>
                     <select
@@ -111,11 +174,16 @@ export default function CourierForm() {
                   <input
                     type="number"
                     name="phone"
+                    id="phone"
+                    {...register("phone", {
+                      required: true,
+                      pattern: /^([0-9\(\)\/\+ \-]*)$/,
+                    })}
                     className="input-field"
                     placeholder="Phone Number*"
                   />
                 </div>
-                <div className="grid md:grid-cols-3 md:gap-2">
+                <div className="grid md:grid-cols-2 md:gap-2">
                   <div>
                     <input
                       type="number"
@@ -136,13 +204,19 @@ export default function CourierForm() {
                     )}
                   </div>
                   <select
-                    name="parcel"
+                    name="parcel-type"
+                    id="parcel-type"
+                    {...register("parcel-type", {
+                      required: true,
+                    })}
                     className="input-field"
-                    placeholder="Parcel Type"
                   >
-                    <option>Type 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
+                    <option defaultChecked disabled>
+                      Parcel Type
+                    </option>
+                    <option value={"electronics"}>Electronics</option>
+                    <option value={"cloths"}>Cloths</option>
+                    <option value={"documents"}>Documents</option>
                   </select>
                 </div>
 
@@ -150,10 +224,12 @@ export default function CourierForm() {
                   <p className="text-md font-medium">
                     Regular Price: {price} Tk
                   </p>
-                  <p className="text-md font-medium">Discount: {discount * 100} %</p>
+                  <p className="text-md font-medium">
+                    Discount: {discount * 100} %
+                  </p>
                   <hr />
                   <p className="text-xl font-semibold">
-                    Total Price: {Math.round(price - (price*discount))}
+                    Total Price: {Math.round(price - price * discount)}
                   </p>
                 </div>
                 <div className="flex justify-end pt-5">
