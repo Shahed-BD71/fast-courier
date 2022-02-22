@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
@@ -23,9 +24,26 @@ export default function CourierForm() {
     return res.data;
   };
   const { data, status, error } = useQuery("rules", fetchUsers);
-  console.log(data)
 
-  
+  useEffect(() => {
+    let pricingRule;
+    if (data) {
+      const today = dayjs();
+      let days = dayjs(data[0].date).diff(today, "d");
+      for (let i = 0; i < data.length; i++) {
+        const ruleDate = dayjs(data[i].date);
+        const diff = ruleDate.diff(today, "d");
+        if (diff !== 0) {
+          if (diff < days) {
+            days = diff;
+            pricingRule = data[i];
+          }
+        }
+      }
+      setDiscount(pricingRule.discount);
+    }
+  }, [data]);
+
   useEffect(() => {
     const subscription = watch(({ weight, route }, data) => {
       if (parseInt(weight) >= 1 && route == "isd") {
@@ -126,38 +144,24 @@ export default function CourierForm() {
                     <option>Option 2</option>
                     <option>Option 3</option>
                   </select>
-                  <div>
-                    <input
-                      {...register("date", { required: true })}
-                      type="date"
-                      name="date"
-                      id="date"
-                      className="input-field"
-                      placeholder="date*"
-                    />
-
-                    {errors.date && (
-                      <span className="text-red-600">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
                 </div>
 
                 <div className="text-right pt-5 space-y-2">
                   <p className="text-md font-medium">
                     Regular Price: {price} Tk
                   </p>
-                  <p className="text-md font-medium">Discount: 10 Tk</p>
+                  <p className="text-md font-medium">Discount: {discount * 100} %</p>
                   <hr />
-                  <p className="text-xl font-semibold">Total Price: 100</p>
+                  <p className="text-xl font-semibold">
+                    Total Price: {Math.round(price - (price*discount))}
+                  </p>
                 </div>
                 <div className="flex justify-end pt-5">
                   <button
                     type="submit"
-                    className="h-12 w-48 rounded font-medium text-xs bg-blue-500 text-white"
+                    className="h-12 w-48 rounded font-medium text-sm bg-blue-500 text-white"
                   >
-                    Continue to Shipping
+                    Book Now
                   </button>
                 </div>
               </form>

@@ -1,103 +1,29 @@
 {
   "rules": [
     {
-      "_id": 1,
-      "date": "2022-02-21T18:25:43.511Z",
-      "discount": 0.2
-    },
-    {
       "_id": 2,
-      "weight": 7,
       "date": "2022-03-15T18:25:43.511Z",
       "discount": 0.3
     },
     {
+      "_id": 1,
+      "date": "2022-02-25T18:25:43.511Z",
+      "discount": 0.2
+    },
+    {
       "_id": 3,
-      "weight": 4,
-      "price": 200,
-      "route": "OSD",
-      "date": "2022-03-15T18:25:43.511Z",
+      "date": "2022-03-10T18:25:43.511Z",
       "discount": 0.5
     },
     {
       "_id": 4,
-      "weight": 8,
-      "price": 200,
-      "route": "ISD",
-      "date": "2022-03-15T18:25:43.511Z",
-      "discount": 0.2
+      "date": "2022-02-23T18:25:43.511Z",
+      "discount": 0.5
     },
     {
       "_id": 5,
-      "weight": 0.5,
-      "price": 50,
-      "route": "OSD",
-      "date": "2022-03-15T18:25:43.511Z",
-      "discount": 0.2
-    },
-    {
-      "_id": 6,
-      "weight": 11,
-      "price": 550,
-      "route": "OSD",
-      "date": "2022-04-15T18:25:43.511Z",
-      "discount": 0.2
-    },
-    {
-      "_id": 7,
-      "weight": 6,
-      "price": 150,
-      "route": "ISD",
-      "date": "2022-05-15T18:25:43.511Z",
-      "discount": 0.2
-    },
-    {
-      "_id": 8,
-      "weight": 8,
-      "price": 400,
-      "route": "OSD",
-      "date": "2022-03-15T18:25:43.511Z",
-      "discount": 0.2
-    },
-    {
-      "_id": 9,
-      "weight": 2,
-      "price": 50,
-      "route": "ISD",
-      "date": "2022-07-15T18:25:43.511Z",
-      "discount": 0.3
-    },
-    {
-      "_id": 10,
-      "weight": 5,
-      "route": "OSD",
-      "price": 250,
-      "date": "2022-03-15T18:25:43.511Z",
-      "discount": 0.3
-    },
-    {
-      "_id": 11,
-      "weight": 5,
-      "route": "ISD",
-      "price": 125,
-      "date": "2022-03-15T18:25:43.511Z",
-      "discount": 1
-    },
-    {
-      "_id": 12,
-      "weight": 0.8,
-      "price": 100,
-      "route": "OSD",
-      "date": "2022-03-15T18:25:43.511Z",
-      "discount": 0.4
-    },
-
-    { 
-        "comments":" // regular pricing rules.  ISD: Per_kg = 25 || less than 1kg 50tk && OSD: Per_kg: 50 || less than 1kg 100tk " 
+      "date": "2022-03-14T18:25:43.511Z",
+      "discount": 0.5
     }
   ]
-  
 }
-
-
-
