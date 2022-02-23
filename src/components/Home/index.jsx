@@ -10,6 +10,9 @@ export default function CourierForm() {
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [date, setDate] = useState(null);
+  let discountPrice = discount * price;
+  let totalPrice = price - price * discount;
+  
   const {
     register,
     handleSubmit,
@@ -246,11 +249,11 @@ export default function CourierForm() {
                       Regular Price: {price} Tk
                     </p>
                     <p className="font-medium text-md">
-                      Discount: {discount * 100} %
+                      Discount: {discountPrice} Tk
                     </p>
                     <hr />
                     <p className="text-lg font-semibold">
-                      Total Price: {Math.round(price - price * discount)} Tk
+                      Total Price: {Math.round(totalPrice)} Tk
                     </p>
                   </div>
                   <div className="flex justify-end pt-5">
