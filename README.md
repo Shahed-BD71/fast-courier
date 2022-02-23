@@ -1,10 +1,15 @@
-Fast Courier service is a 
 # Single Page Courier Service React Application
-Where a user Book her Parcel by providing her courier information.
+Fast Courier is a system, where a user Book her Parcel by providing her courier information.
 They show & get discounts based on promotion or remaining discount date.
 ## The discount info. automatically change when a discount offer date is over. 
 All the discount offers come from JSON Server...
 
+To run this application locally.
+```bash
+yarn install
+# then
+yarn start:dev
+```
 
 # fast-courier
 Single Page Online Courier Service.
