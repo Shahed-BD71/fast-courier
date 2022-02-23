@@ -85,12 +85,12 @@ export default function CourierForm() {
     <section>
       <div className="bg-gray-300">
         <div className="py-12">
-          <div className="bg-white w-full rounded-lg shadow-lg">
+          <div className="bg-white rounded-lg shadow-lg">
             <div className="flex flex-row p-6 md:p-12">
               <h2 className="text-3xl font-semibold">Fast</h2>
               <h2 className="text-3xl font-semibold text-green-400">Courier</h2>
             </div>
-            <div className="md:flex">
+            <div className="md:flex max-w-screen">
               <HeroSection />
               <div className="w-full p-4 md:px-16 px-8 py-8">
                 <div className="flex flex-row py-5 text-xs">
