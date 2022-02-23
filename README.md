@@ -1,5 +1,5 @@
 # Single Page Courier Service React Application
-Fast Courier is a system, where a user Book her Parcel by providing her courier information.
+Fast Courier is a system, where a user Book her Parcel by providing their courier information.
 They show & get discounts based on promotion or remaining discount date.
 ## The discount info. automatically change when a discount offer date is over. 
 All the discount offers come from JSON Server...
