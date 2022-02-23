@@ -256,7 +256,7 @@ export default function CourierForm() {
                   <div className="flex justify-end pt-5">
                     <button
                       type="submit"
-                      className="w-32 h-10 text-sm font-medium text-white bg-blue-500 rounded md:h-12 md:w-48"
+                      className="w-32 h-10 text-sm font-medium text-white bg-green-500 rounded md:h-12 md:w-48"
                     >
                       Book Now
                     </button>
